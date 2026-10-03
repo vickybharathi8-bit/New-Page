@@ -680,23 +680,30 @@ footer strong {
 }
 
 /* =========================
-   WIND / FALLING LEAVES
+   FOREST ATMOSPHERE
 ========================= */
 
-.wind-layer {
+.forest-wind {
     position: fixed;
-
     inset: 0;
 
     width: 100%;
     height: 100%;
 
     pointer-events: none;
-
     overflow: hidden;
 
+    /*
+       Behind the website,
+       but above the forest background.
+    */
     z-index: 1;
 }
+
+
+/* =========================
+   FALLING / WIND-BLOWN LEAVES
+========================= */
 
 .leaf {
     position: absolute;
@@ -708,7 +715,9 @@ footer strong {
 
     opacity: 0.45;
 
-    filter: blur(0.2px);
+    filter:
+        blur(0.2px)
+        drop-shadow(0 0 4px rgba(150, 220, 160, 0.2));
 
     animation-name: windLeaf;
     animation-timing-function: linear;
@@ -767,6 +776,11 @@ footer strong {
 }
 
 
+/*
+   Leaves move diagonally with
+   changing wind direction.
+*/
+
 @keyframes windLeaf {
 
     0% {
@@ -781,266 +795,313 @@ footer strong {
         opacity: 0.5;
     }
 
-    30% {
+    25% {
         transform:
-            translate(30vw, 25vh)
-            rotate(160deg);
+            translate(20vw, 18vh)
+            rotate(120deg);
     }
 
-    55% {
+    45% {
         transform:
-            translate(55vw, 45vh)
-            rotate(300deg);
+            translate(43vw, 30vh)
+            rotate(240deg);
     }
 
-    75% {
+    65% {
         transform:
-            translate(80vw, 65vh)
-            rotate(450deg);
+            translate(65vw, 52vh)
+            rotate(380deg);
+    }
+
+    82% {
+        transform:
+            translate(88vw, 70vh)
+            rotate(520deg);
     }
 
     100% {
         transform:
             translate(115vw, 95vh)
-            rotate(650deg);
+            rotate(680deg);
 
         opacity: 0;
     }
 }
 
+
 /* =========================
-   VISIBLE WIND
+   FOREST WIND ATMOSPHERE
 ========================= */
 
-.wind-streak {
+/*
+   This is NOT a visible wind line.
+
+   It creates a very subtle moving
+   atmospheric haze across the forest.
+*/
+
+.forest-mist {
+
     position: absolute;
 
-    width: 220px;
-    height: 2px;
+    width: 75%;
+    height: 22%;
+
+    left: -25%;
 
     border-radius: 50%;
 
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(220, 255, 225, 0.45),
-        transparent
-    );
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(180, 230, 190, 0.07),
+            transparent 70%
+        );
 
-    filter: blur(1px);
+    filter: blur(20px);
 
     opacity: 0;
 
     pointer-events: none;
 }
 
-.streak-1 {
-    top: 30%;
-    left: -250px;
-    animation: windAcross 9s linear infinite;
-}
+.mist-1 {
 
-.streak-2 {
-    top: 48%;
-    left: -300px;
-    animation: windAcross 12s linear infinite;
-    animation-delay: 4s;
-}
-
-.streak-3 {
-    top: 65%;
-    left: -350px;
-    animation: windAcross 10s linear infinite;
-    animation-delay: 7s;
-}
-
-@keyframes windAcross {
-
-    0% {
-        transform: translateX(-250px) translateY(0);
-        opacity: 0;
-    }
-
-    15% {
-        opacity: 0.65;
-    }
-
-    45% {
-        transform: translateX(45vw) translateY(-18px);
-        opacity: 0.4;
-    }
-
-    75% {
-        transform: translateX(80vw) translateY(15px);
-        opacity: 0.25;
-    }
-
-    100% {
-        transform: translateX(120vw) translateY(-10px);
-        opacity: 0;
-    }
-}
-
-/* =========================
-   DISTANT FOREST ANIMALS
-========================= */
-
-.animal-layer {
-    position: fixed;
-
-    left: 0;
-    bottom: 5%;
-
-    width: 100%;
-    height: 160px;
-
-    pointer-events: none;
-
-    overflow: hidden;
-
-    z-index: 2;
-}
-
-
-/* Animal */
-
-.animal {
-    position: absolute;
-
-    bottom: 10px;
-
-    font-size: 70px;
-
-    white-space: nowrap;
-
-    opacity: 0;
-
-    filter:
-        grayscale(1)
-        brightness(0.18)
-        contrast(1.4)
-        drop-shadow(0 0 8px rgba(0,0,0,0.8));
-}
-
-
-/* First deer */
-
-.deer-one {
-
-    left: -150px;
+    top: 22%;
 
     animation:
-        deerWalk 30s linear infinite;
+        forestWind 18s ease-in-out infinite;
 }
 
+.mist-2 {
 
-/* Second deer */
-
-.deer-two {
-
-    left: -250px;
-
-    bottom: 25px;
-
-    font-size: 50px;
+    top: 52%;
 
     animation:
-        deerWalk 42s linear infinite;
+        forestWind 24s ease-in-out infinite;
 
-    animation-delay: 10s;
+    animation-delay: 8s;
 }
 
 
-@keyframes deerWalk {
+@keyframes forestWind {
 
     0% {
         transform:
-            translateX(-150px)
-            scaleX(1);
+            translateX(-20vw)
+            translateY(10px)
+            scaleX(0.9);
 
         opacity: 0;
     }
 
-    8% {
-        opacity: 0.65;
+    20% {
+        opacity: 0.7;
     }
 
-    35% {
+    50% {
         transform:
             translateX(35vw)
-            scaleX(1);
+            translateY(-15px)
+            scaleX(1.15);
 
-        opacity: 0.65;
-    }
-
-    48% {
-        transform:
-            translateX(50vw)
-            scaleX(1);
-    }
-
-    52% {
-        transform:
-            translateX(55vw)
-            scaleX(-1);
-    }
-
-    80% {
         opacity: 0.45;
     }
 
-    92% {
+    80% {
         opacity: 0.2;
     }
 
     100% {
         transform:
             translateX(120vw)
-            scaleX(-1);
+            translateY(10px)
+            scaleX(1.25);
 
         opacity: 0;
     }
 }
 
-@keyframes deerWalk {
+
+/* =========================
+   DISTANT FOREST ANIMALS
+========================= */
+
+.forest-animal {
+
+    position: absolute;
+
+    bottom: 12%;
+
+    width: 90px;
+    height: 65px;
+
+    opacity: 0;
+
+    filter:
+        blur(0.8px)
+        brightness(0.12)
+        contrast(1.5);
+
+    pointer-events: none;
+}
+
+
+/* Deer body */
+
+.deer-body {
+
+    position: absolute;
+
+    left: 15px;
+    bottom: 8px;
+
+    width: 58px;
+    height: 25px;
+
+    border-radius:
+        55% 45% 45% 40%;
+
+    background: #020704;
+
+    transform: skewX(-8deg);
+}
+
+
+/* Deer head */
+
+.deer-body::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 19px;
+    height: 20px;
+
+    right: -10px;
+    top: -10px;
+
+    background: #020704;
+
+    border-radius:
+        60% 45% 40% 45%;
+
+    transform: rotate(-15deg);
+}
+
+
+/* Deer legs */
+
+.deer-body::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 12px;
+    bottom: -22px;
+
+    width: 5px;
+    height: 25px;
+
+    background: #020704;
+
+    box-shadow:
+        17px 0 #020704,
+        35px 0 #020704;
+
+    transform: skewX(5deg);
+}
+
+
+/* First distant animal */
+
+.deer-one {
+
+    left: -120px;
+
+    animation:
+        distantDeer 38s linear infinite;
+}
+
+
+/* Second distant animal */
+
+.deer-two {
+
+    left: -300px;
+
+    bottom: 17%;
+
+    transform: scale(0.7);
+
+    animation:
+        distantDeer 48s linear infinite;
+
+    animation-delay: 15s;
+}
+
+
+/* Animals slowly cross the forest */
+
+@keyframes distantDeer {
 
     0% {
+
         transform:
             translateX(-150px)
-            scaleX(1);
+            scale(0.75);
 
         opacity: 0;
     }
 
-    10% {
-        opacity: 0.8;
+    12% {
+
+        opacity: 0.55;
     }
 
-    45% {
+    30% {
+
         transform:
-            translateX(45vw)
-            scaleX(1);
+            translateX(25vw)
+            scale(0.75);
+
+        opacity: 0.55;
     }
 
-    50% {
+    48% {
+
         transform:
-            translateX(50vw)
-            scaleX(-1);
+            translateX(48vw)
+            scale(0.75);
+
+        opacity: 0.5;
     }
 
-    90% {
-        opacity: 0.6;
+    65% {
+
+        transform:
+            translateX(70vw)
+            scale(0.75);
+
+        opacity: 0.4;
+    }
+
+    85% {
+
+        opacity: 0.2;
     }
 
     100% {
+
         transform:
-            translateX(115vw)
-            scaleX(-1);
+            translateX(120vw)
+            scale(0.75);
 
         opacity: 0;
     }
 }
-
 
 /* =========================
    KEEP CONTENT ABOVE EFFECTS
